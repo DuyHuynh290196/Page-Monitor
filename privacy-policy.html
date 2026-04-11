@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Page Monitor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1629;
+      --border: #1e2d4a;
+      --accent: #38bdf8;
+      --green: #34d399;
+      --text: #e2e8f0;
+      --text2: #94a3b8;
+      --text3: #475569;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Sora', sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+    }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px; font-weight: 600;
+      color: var(--accent);
+    }
+    .logo-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100%{opacity:1;transform:scale(1)}
+      50%{opacity:.5;transform:scale(.8)}
+    }
+    main { padding: 56px 0; }
+    .page-title {
+      font-size: 36px; font-weight: 700;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #e2e8f0 0%, #38bdf8 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .page-subtitle { color: var(--text2); margin-bottom: 48px; font-size: 14px; }
+    .effective-date {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(56,189,248,0.08);
+      border: 1px solid rgba(56,189,248,0.2);
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 48px;
+    }
+    section { margin-bottom: 40px; }
+    h2 {
+      font-size: 18px; font-weight: 600;
+      color: var(--text);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    h2 .num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--accent);
+      background: rgba(56,189,248,0.1);
+      padding: 2px 8px; border-radius: 4px;
+    }
+    p { color: var(--text2); margin-bottom: 12px; }
+    ul { color: var(--text2); padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+    ul li { padding-left: 20px; position: relative; }
+    ul li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+    .highlight-box {
+      background: rgba(52,211,153,0.05);
+      border: 1px solid rgba(52,211,153,0.2);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 20px 0;
+    }
+    .highlight-box p { color: var(--green); margin: 0; font-size: 14px; }
+    .permission-table {
+      width: 100%; border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+    .permission-table th {
+      text-align: left; padding: 10px 14px;
+      background: var(--bg2);
+      color: var(--text2);
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border);
+    }
+    .permission-table td {
+      padding: 10px 14px;
+      color: var(--text2);
+      border-bottom: 1px solid rgba(30,45,74,0.5);
+      vertical-align: top;
+    }
+    .permission-table td:first-child {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text3);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <div class="logo-dot"></div>
+        Page Monitor
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1 class="page-title">Privacy Policy</h1>
+      <p class="page-subtitle">We believe in radical transparency. Here's exactly what we do (and don't do) with your data.</p>
+      <div class="effective-date">📅 Effective date: January 1, 2025</div>
+
+      <div class="highlight-box">
+        <p>✅ <strong>TL;DR:</strong> Page Monitor stores all data locally on your device only. We collect zero personal information, send nothing to external servers, and never share your data with anyone.</p>
+      </div>
+
+      <section>
+        <h2><span class="num">01</span> Overview</h2>
+        <p>Page Monitor ("the Extension") is a Chrome browser extension that allows users to monitor changes on web pages and receive notifications when content changes. This Privacy Policy describes how the Extension handles information.</p>
+        <p>This policy applies to the Page Monitor Chrome extension available on the Chrome Web Store.</p>
+      </section>
+
+      <section>
+        <h2><span class="num">02</span> Data We Collect</h2>
+        <p><strong>We collect no personal data.</strong> The Extension operates entirely on your local device.</p>
+        <p>The following information is stored <strong>locally on your device only</strong> using Chrome's built-in <code>chrome.storage.local</code> API:</p>
+        <ul>
+          <li>URLs of web pages you choose to monitor</li>
+          <li>CSS selectors you configure for monitored elements</li>
+          <li>Text content snapshots of monitored elements (for change detection)</li>
+          <li>Your notification and check interval preferences</li>
+          <li>History of detected changes</li>
+        </ul>
+        <p>This data never leaves your device and is never transmitted to any server.</p>
+      </section>
+
+      <section>
+        <h2><span class="num">03</span> Permissions Explained</h2>
+        <p>The Extension requests the following Chrome permissions:</p>
+        <table class="permission-table">
+          <thead>
+            <tr>
+              <th>Permission</th>
+              <th>Why it's needed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>activeTab</td>
+              <td>To read content from the current tab when you add a monitor or check for changes</td>
+            </tr>
+            <tr>
+              <td>storage</td>
+              <td>To save your monitor list and change history locally on your device</td>
+            </tr>
+            <tr>
+              <td>alarms</td>
+              <td>To schedule periodic checks at the interval you configure</td>
+            </tr>
+            <tr>
+              <td>notifications</td>
+              <td>To send you browser notifications when a change is detected</td>
+            </tr>
+            <tr>
+              <td>scripting</td>
+              <td>To extract text content from monitored elements on web pages</td>
+            </tr>
+            <tr>
+              <td>tabs</td>
+              <td>To access the URL of the current tab when setting up a monitor</td>
+            </tr>
+            <tr>
+              <td>host_permissions (&lt;all_urls&gt;)</td>
+              <td>Required to read page content on any URL you choose to monitor</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2><span class="num">04</span> Data Sharing</h2>
+        <p>We do not share any data with third parties. We have no analytics, no tracking, no advertising, and no external API calls of any kind.</p>
+        <ul>
+          <li>No data is sent to our servers (we have none)</li>
+          <li>No third-party analytics or tracking SDKs are included</li>
+          <li>No advertising networks have access to any information</li>
+          <li>No data is sold or licensed to any party</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="num">05</span> Data Retention & Deletion</h2>
+        <p>All data is stored locally and you have full control:</p>
+        <ul>
+          <li>Delete individual monitors at any time from the extension popup</li>
+          <li>Clear all change history with one click</li>
+          <li>Uninstalling the extension permanently removes all stored data</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="num">06</span> Children's Privacy</h2>
+        <p>The Extension is not directed at children under 13. We do not knowingly collect any information from children.</p>
+      </section>
+
+      <section>
+        <h2><span class="num">07</span> Changes to This Policy</h2>
+        <p>If we update this policy, we will update the effective date above. Continued use of the Extension after changes constitutes acceptance of the updated policy.</p>
+      </section>
+
+      <section>
+        <h2><span class="num">08</span> Contact</h2>
+        <p>If you have any questions about this Privacy Policy, please open an issue on our GitHub repository or contact us at the email listed on the Chrome Web Store listing.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2025 Page Monitor · All data stays on your device · Built with ♥
+    </div>
+  </footer>
+</body>
+</html>
