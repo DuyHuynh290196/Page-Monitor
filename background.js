@@ -254,7 +254,7 @@ async function checkMonitor(monitorId) {
             type: 'basic',
             iconUrl: 'icons/icon48.png',
             title: `Page Monitor: ${monitor.title}`,
-            message: 'Tab đã bị đóng, không thể theo dõi. Vui lòng mở lại trang.',
+            message: 'Tab was closed — monitoring paused. Please reopen the page.',
             priority: 1
           });
         }
@@ -332,7 +332,7 @@ async function processChange(monitor, currentValue, monitors) {
         type: 'basic',
         iconUrl: 'icons/icon48.png',
         title: `Page Monitor: ${monitor.title}`,
-        message: `Nội dung đã thay đổi!\nCũ: ${(monitor.lastValue || '').substring(0, 60)}\nMới: ${currentValue.substring(0, 60)}`,
+        message: `Content changed!\nOld: ${(monitor.lastValue || '').substring(0, 60)}\nNew: ${currentValue.substring(0, 60)}`,
         priority: 2
       });
     }

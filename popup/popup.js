@@ -6,11 +6,11 @@ let pickedData = null;
 let editingId = null;
 
 const CATEGORY_LABELS = {
-  general: 'Chung', price: 'Giá', job: 'Tuyển dụng', order: 'Đơn hàng', news: 'Tin tức'
+  general: 'General', price: 'Price', job: 'Jobs', order: 'Orders', news: 'News'
 };
 
 const INTERVAL_LABELS = {
-  1: '1p', 5: '5p', 15: '15p', 30: '30p', 60: '1h', 360: '6h', 1440: '24h'
+  1: '1m', 5: '5m', 15: '15m', 30: '30m', 60: '1h', 360: '6h', 1440: '24h'
 };
 
 // Init
@@ -68,7 +68,7 @@ async function checkPendingMonitor() {
   if (result && result.success) {
     // Show brief success flash then refresh
     const btn = document.getElementById('btnSave');
-    if (btn) { btn.textContent = '✓ Đã lưu!'; btn.style.background = '#34d399'; }
+    if (btn) { btn.textContent = '✓ Saved!'; btn.style.background = '#34d399'; }
     setTimeout(() => loadData(), 600);
   }
 }
@@ -161,7 +161,7 @@ function setupForm() {
 
     // Check it's a real page (not chrome:// etc)
     if (!tab.url || tab.url.startsWith('chrome://') || tab.url.startsWith('chrome-extension://')) {
-      alert('Vui lòng mở một trang web trước khi dùng tính năng này.');
+      alert('Please open a webpage before using this feature.');
       return;
     }
 
@@ -222,7 +222,7 @@ async function saveMonitor() {
   const category = document.getElementById('inputCategory').value;
 
   if (!url || !selector) {
-    alert('Vui lòng nhập URL và CSS Selector');
+    alert('Please enter a URL and CSS Selector');
     return;
   }
 
@@ -232,7 +232,7 @@ async function saveMonitor() {
     const origin = new URL(url);
     pattern = `${origin.protocol}//${origin.hostname}/*`;
   } catch {
-    alert('URL không hợp lệ.');
+    alert('Invalid URL.');
     return;
   }
 
@@ -254,7 +254,7 @@ async function saveMonitor() {
 
   const btnSave = document.getElementById('btnSave');
   btnSave.disabled = true;
-  btnSave.textContent = 'Đang lưu...';
+  btnSave.textContent = 'Saving...';
 
   // Get initial value
   const initialValue = pickedData ? pickedData.value : await previewSelector(selector);
@@ -280,7 +280,7 @@ async function saveMonitor() {
   }
 
   btnSave.disabled = false;
-  btnSave.textContent = editingId ? 'Cập nhật' : 'Lưu Monitor';
+  btnSave.textContent = editingId ? 'Update' : 'Save Monitor';
   editingId = null;
   pickedData = null;
 }
@@ -296,7 +296,7 @@ function resetForm() {
   pickerMode = false;
   pickedData = null;
   document.getElementById('btnPick').classList.remove('active');
-  document.getElementById('btnSave').textContent = 'Lưu Monitor';
+  document.getElementById('btnSave').textContent = 'Save Monitor';
   editingId = null;
 }
 
@@ -305,14 +305,14 @@ function setupListeners() {
     const link = e.target.closest('.open-tab-link');
     if (!link) return;
     e.preventDefault();
-    link.textContent = 'Đang mở...';
+    link.textContent = 'Opening...';
     await sendMsg({ type: 'OPEN_AND_CHECK', id: link.dataset.id, url: link.dataset.url });
     await loadData();
   });
 
   // Clear changes
   document.getElementById('btnClearAll').addEventListener('click', async () => {
-    if (confirm('Xóa tất cả lịch sử thay đổi?')) {
+    if (confirm('Clear all change history?')) {
       await sendMsg({ type: 'CLEAR_CHANGES' });
       changes = [];
       renderChanges();
@@ -341,17 +341,17 @@ function renderMonitors() {
     card.dataset.id = m.id;
 
     const lastChecked = m.lastChecked
-      ? `Kiểm tra lúc ${formatTime(m.lastChecked)}`
-      : 'Chưa kiểm tra';
+      ? `Checked ${formatTime(m.lastChecked)}`
+      : 'Not checked yet';
 
     card.innerHTML = `
       <div class="card-top">
         <div class="card-title cat-${m.category}">${escHtml(m.title)}</div>
         <div class="card-actions">
-          <button class="btn-icon success" title="Kiểm tra ngay" data-action="check">↺</button>
-          <button class="btn-icon" title="Sửa" data-action="edit">✎</button>
-          <button class="btn-icon danger" title="Xóa" data-action="delete">✕</button>
-          <label class="toggle" title="${m.active ? 'Đang bật' : 'Đang tắt'}">
+          <button class="btn-icon success" title="Check now" data-action="check">↺</button>
+          <button class="btn-icon" title="Edit" data-action="edit">✎</button>
+          <button class="btn-icon danger" title="Delete" data-action="delete">✕</button>
+          <label class="toggle" title="${m.active ? 'Active' : 'Inactive'}">
             <input type="checkbox" ${m.active ? 'checked' : ''} data-action="toggle">
             <span class="toggle-slider"></span>
           </label>
@@ -359,19 +359,19 @@ function renderMonitors() {
       </div>
       <div class="card-meta">
         <span class="meta-tag category">${CATEGORY_LABELS[m.category] || m.category}</span>
-        <span class="meta-tag interval">⏱ ${INTERVAL_LABELS[m.intervalMinutes] || m.intervalMinutes + 'p'}</span>
+        <span class="meta-tag interval">⏱ ${INTERVAL_LABELS[m.intervalMinutes] || m.intervalMinutes + 'm'}</span>
       </div>
       <div class="card-selector">${escHtml(m.selector)}</div>
       <div class="card-status">
         <div class="status-dot ${m.active ? (m.lastError ? 'error' : 'active') : 'inactive'}"></div>
-        <span class="status-text">${m.lastError === 'tab_closed' ? `⚠ Tab đã đóng — <a class="open-tab-link" href="#" data-url="${escHtml(m.url)}" data-id="${m.id}">Mở lại</a>` : lastChecked}</span>
-        ${m.changeCount > 0 ? `<span class="change-count">${m.changeCount} thay đổi</span>` : ''}
+        <span class="status-text">${m.lastError === 'tab_closed' ? `⚠ Tab closed — <a class="open-tab-link" href="#" data-url="${escHtml(m.url)}" data-id="${m.id}">Reopen</a>` : lastChecked}</span>
+        ${m.changeCount > 0 ? `<span class="change-count">${m.changeCount} changes</span>` : ''}
       </div>
     `;
 
     // Events
     card.querySelector('[data-action="delete"]').addEventListener('click', async () => {
-      if (confirm(`Xóa monitor "${m.title}"?`)) {
+      if (confirm(`Delete monitor "${m.title}"?`)) {
         card.style.transition = 'opacity 0.3s, transform 0.3s';
         card.style.opacity = '0';
         card.style.transform = 'scale(0.95)';
@@ -403,7 +403,7 @@ function renderMonitors() {
       document.getElementById('inputCategory').value = m.category;
       document.getElementById('previewBox').style.display = 'none';
       document.getElementById('addForm').style.display = 'flex';
-      document.getElementById('btnSave').textContent = 'Cập nhật';
+      document.getElementById('btnSave').textContent = 'Update';
       document.getElementById('addForm').scrollIntoView({ behavior: 'smooth' });
     });
 
@@ -415,14 +415,14 @@ function renderChanges() {
   const list = document.getElementById('changesList');
   const count = document.getElementById('changesCount');
 
-  count.textContent = `${changes.length} thay đổi`;
+  count.textContent = `${changes.length} change${changes.length !== 1 ? 's' : ''}`;
 
   if (changes.length === 0) {
     list.innerHTML = `
       <div class="empty-state">
         <div class="empty-icon">✅</div>
-        <p>Không có thay đổi nào</p>
-        <span>Khi phát hiện thay đổi sẽ hiện ở đây</span>
+        <p>No changes yet</p>
+        <span>Detected changes will appear here</span>
       </div>`;
     return;
   }
@@ -439,11 +439,11 @@ function renderChanges() {
       </div>
       <div class="change-diff">
         <div class="diff-row">
-          <span class="diff-label old">CŨ</span>
+          <span class="diff-label old">OLD</span>
           <span class="diff-value">${escHtml((c.oldValue || '').substring(0, 80))}</span>
         </div>
         <div class="diff-row">
-          <span class="diff-label new">MỚI</span>
+          <span class="diff-label new">NEW</span>
           <span class="diff-value">${escHtml((c.newValue || '').substring(0, 80))}</span>
         </div>
       </div>
@@ -507,8 +507,8 @@ function formatTime(iso) {
   const d = new Date(iso);
   const now = new Date();
   const diff = Math.floor((now - d) / 1000);
-  if (diff < 60) return 'vừa xong';
-  if (diff < 3600) return `${Math.floor(diff/60)} phút trước`;
-  if (diff < 86400) return `${Math.floor(diff/3600)} giờ trước`;
-  return d.toLocaleDateString('vi-VN');
+  if (diff < 60) return 'just now';
+  if (diff < 3600) return `${Math.floor(diff/60)} min ago`;
+  if (diff < 86400) return `${Math.floor(diff/3600)} hr ago`;
+  return d.toLocaleDateString('en-US');
 }
