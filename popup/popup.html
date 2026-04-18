@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,62 +30,62 @@
       <!-- Add Monitor Form -->
       <div class="add-section">
         <button class="btn-add-toggle" id="btnToggleForm">
-          <span>＋</span> Thêm monitor mới
+          <span>＋</span> Add new monitor
         </button>
 
         <div class="add-form" id="addForm" style="display:none">
           <div class="form-group">
-            <label>Tên gợi nhớ</label>
-            <input type="text" id="inputTitle" placeholder="VD: Giá iPhone 16 Pro">
+            <label>Display name</label>
+            <input type="text" id="inputTitle" placeholder="e.g. iPhone 16 Pro Price">
           </div>
           <div class="form-group">
-            <label>URL trang web</label>
+            <label>Page URL</label>
             <div class="input-row">
               <input type="text" id="inputUrl" placeholder="https://...">
-              <button class="btn-current" id="btnCurrentUrl" title="Dùng URL hiện tại">↗</button>
+              <button class="btn-current" id="btnCurrentUrl" title="Use current tab URL">↗</button>
             </div>
           </div>
           <div class="form-group">
             <label>CSS Selector</label>
             <div class="input-row">
               <input type="text" id="inputSelector" placeholder=".price, #stock-status, h1">
-              <button class="btn-pick" id="btnPick" title="Click để chọn element">🎯</button>
+              <button class="btn-pick" id="btnPick" title="Click to pick an element">🎯</button>
             </div>
             <div class="pick-hint" id="pickHint" style="display:none">
-              Chuyển sang trang và click vào element cần theo dõi. Nhấn ESC để hủy.
+              Switch to the page and click the element you want to monitor. Press ESC to cancel.
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label>Kiểm tra mỗi</label>
+              <label>Check every</label>
               <select id="inputInterval">
-                <option value="1">1 phút</option>
-                <option value="5" selected>5 phút</option>
-                <option value="15">15 phút</option>
-                <option value="30">30 phút</option>
-                <option value="60">1 giờ</option>
-                <option value="360">6 giờ</option>
-                <option value="1440">24 giờ</option>
+                <option value="1">1 min</option>
+                <option value="5" selected>5 min</option>
+                <option value="15">15 min</option>
+                <option value="30">30 min</option>
+                <option value="60">1 hour</option>
+                <option value="360">6 hours</option>
+                <option value="1440">24 hours</option>
               </select>
             </div>
             <div class="form-group">
-              <label>Danh mục</label>
+              <label>Category</label>
               <select id="inputCategory">
-                <option value="general">📌 Chung</option>
-                <option value="price">💰 Giá</option>
-                <option value="job">💼 Tuyển dụng</option>
-                <option value="order">📦 Đơn hàng</option>
-                <option value="news">📰 Tin tức</option>
+                <option value="general">📌 General</option>
+                <option value="price">💰 Price</option>
+                <option value="job">💼 Jobs</option>
+                <option value="order">📦 Orders</option>
+                <option value="news">📰 News</option>
               </select>
             </div>
           </div>
           <div class="preview-box" id="previewBox" style="display:none">
-            <span class="preview-label">Giá trị hiện tại:</span>
+            <span class="preview-label">Current value:</span>
             <span class="preview-value" id="previewValue"></span>
           </div>
           <div class="form-actions">
-            <button class="btn-cancel" id="btnCancel">Hủy</button>
-            <button class="btn-save" id="btnSave">Lưu Monitor</button>
+            <button class="btn-cancel" id="btnCancel">Cancel</button>
+            <button class="btn-save" id="btnSave">Save Monitor</button>
           </div>
         </div>
       </div>
@@ -94,8 +94,8 @@
       <div class="monitor-list" id="monitorList">
         <div class="empty-state" id="emptyState">
           <div class="empty-icon">📡</div>
-          <p>Chưa có monitor nào</p>
-          <span>Thêm monitor để bắt đầu theo dõi thay đổi</span>
+          <p>No monitors yet</p>
+          <span>Add a monitor to start tracking changes</span>
         </div>
       </div>
     </div>
@@ -105,8 +105,8 @@
       <div class="settings-list">
         <div class="setting-item">
           <div class="setting-info">
-            <span class="setting-label">Hiện badge đỏ</span>
-            <span class="setting-desc">Hiện số thay đổi trên icon extension</span>
+            <span class="setting-label">Red badge</span>
+            <span class="setting-desc">Show change count on the extension icon</span>
           </div>
           <label class="toggle">
             <input type="checkbox" id="settingBadge" checked>
@@ -116,7 +116,7 @@
         <div class="setting-item">
           <div class="setting-info">
             <span class="setting-label">Push notification</span>
-            <span class="setting-desc">Thông báo khi phát hiện thay đổi</span>
+            <span class="setting-desc">Notify when a change is detected</span>
           </div>
           <label class="toggle">
             <input type="checkbox" id="settingNotify" checked>
@@ -125,8 +125,8 @@
         </div>
         <div class="setting-item">
           <div class="setting-info">
-            <span class="setting-label">Âm thanh</span>
-            <span class="setting-desc">Phát âm thanh khi có thay đổi</span>
+            <span class="setting-label">Sound</span>
+            <span class="setting-desc">Play a sound when a change is detected</span>
           </div>
           <label class="toggle">
             <input type="checkbox" id="settingSound" checked>
@@ -139,14 +139,14 @@
     <!-- Tab: Changes -->
     <div class="tab-content" id="tab-changes">
       <div class="changes-header">
-        <span class="changes-count" id="changesCount">0 thay đổi</span>
-        <button class="btn-clear-all" id="btnClearAll">Xóa tất cả</button>
+        <span class="changes-count" id="changesCount">0 changes</span>
+        <button class="btn-clear-all" id="btnClearAll">Clear all</button>
       </div>
       <div class="changes-list" id="changesList">
         <div class="empty-state">
           <div class="empty-icon">✅</div>
-          <p>Không có thay đổi nào</p>
-          <span>Khi phát hiện thay đổi sẽ hiện ở đây</span>
+          <p>No changes yet</p>
+          <span>Detected changes will appear here</span>
         </div>
       </div>
     </div>
