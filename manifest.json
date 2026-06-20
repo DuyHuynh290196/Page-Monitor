@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Page Monitor",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Monitor content changes on any webpage. Get notified instantly when changes are detected.",
   "permissions": [
     "activeTab",
