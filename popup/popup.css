@@ -596,3 +596,43 @@ body {
 .status-dot.error { background: #f59e0b; box-shadow: 0 0 6px #f59e0b88; }
 .open-tab-link { color: #f59e0b; text-decoration: underline; cursor: pointer; }
 .open-tab-link:hover { color: #fbbf24; }
+
+/* Footer */
+.footer {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.donate-subtitle {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
+}
+.donate-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  box-shadow: 0 2px 8px rgba(251, 191, 36, 0.25);
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+}
+.donate-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+  filter: brightness(1.05);
+}
+.donate-link:active { transform: translateY(0); }
+.donate-icon { font-size: 16px; }
